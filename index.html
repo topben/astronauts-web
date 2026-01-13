@@ -8,10 +8,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/main.css">
 
     <style>
-        /* Custom Overrides */
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0 0 1rem 0;
+            line-height: 1.2;
+        }
+
+        p {
+            margin: 0 0 1rem 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: inherit;
+        }
+
         :root {
             --accent: #4A90E2;
             --accent-orange: #F5A623;
@@ -20,10 +54,53 @@
             --light: #f5f5f5;
         }
 
-        body {
-            font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
-            background: #0a0a0a;
-            color: #fff;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .navigation a {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .navigation a:hover,
+        .navigation a.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .navigation a span {
+            display: none;
+        }
+
+        /* Section Numbers */
+        .number {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0.3;
         }
 
         /* Stars background */
@@ -53,7 +130,7 @@
             50% { opacity: 1; }
         }
 
-        /* Hero Enhancements */
+        /* Hero */
         .hero {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             position: relative;
@@ -96,6 +173,15 @@
             padding-left: 12px;
         }
 
+        .steez-line {
+            display: none;
+        }
+
+        .logo img {
+            margin-bottom: 20px;
+        }
+
+        /* Countdown */
         .countdown {
             display: flex;
             align-items: baseline;
@@ -144,7 +230,59 @@
             color: #fff;
         }
 
-        /* Mission Cards */
+        /* About Section */
+        .about {
+            position: relative;
+            padding: 100px 40px;
+            background: #0a0a0a;
+        }
+
+        .about h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .about h3 span {
+            font-size: 14px;
+            opacity: 0.5;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .about .text {
+            max-width: 700px;
+        }
+
+        .about .belief-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 10px;
+        }
+
+        .about .glow {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        /* Missions Section */
+        .missions {
+            position: relative;
+            padding: 100px 40px;
+            background: #0f1219;
+        }
+
+        .missions h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            margin-bottom: 16px;
+        }
+
         .missions-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -184,10 +322,12 @@
             font-size: 14px;
             color: rgba(255,255,255,0.7);
             line-height: 1.7;
+            margin: 0;
         }
 
         /* Engine Display */
         .engine-section {
+            position: relative;
             padding: 100px 40px;
             background: linear-gradient(180deg, #0a0a1a 0%, #16100a 50%, #0a0a1a 100%);
             text-align: center;
@@ -225,6 +365,7 @@
 
         /* Knowledge Base Grid */
         .kb-section {
+            position: relative;
             padding: 100px 40px;
             background: #0f1219;
         }
@@ -313,8 +454,12 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 42px; letter-spacing: 4px; padding-left: 0; }
             .countdown-value { font-size: 32px; }
-            .missions-grid, .engine-specs, .kb-grid, .stats-grid { grid-template-columns: 1fr; }
+            .countdown-ms { font-size: 18px; }
+            .countdown-sep { font-size: 24px; }
+            .missions-grid, .engine-specs, .kb-grid { grid-template-columns: 1fr; }
             .kb-card { flex-direction: column; text-align: center; }
+            .navigation { display: none; }
+            .about, .missions, .engine-section, .kb-section { padding: 60px 20px; }
         }
     </style>
 </head>
@@ -592,14 +737,36 @@
         </p>
     </footer>
 
-    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/jquery.min.js"></script>
-    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/waypoints.min.js"></script>
-    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Loader.js"></script>
-    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Parallax.js"></script>
-    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Navigation.js"></script>
-    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.js"></script>
-
     <script>
+    // Simple Navigation
+    const Navigation = {
+        scrollTo: function(selector) {
+            const el = document.querySelector(selector);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    };
+
+    // Update active nav on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = ['.hero', '.about', '.missions', '.engine-section', '.kb-section', '.team-section', '.sponsors-section'];
+        const navLinks = document.querySelectorAll('.navigation a');
+
+        window.addEventListener('scroll', function() {
+            let current = 0;
+            sections.forEach((selector, index) => {
+                const section = document.querySelector(selector);
+                if (section && window.scrollY >= section.offsetTop - 200) {
+                    current = index;
+                }
+            });
+            navLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === current);
+            });
+        });
+    });
+
     // Countdown Timer
     (function() {
         const launchDate = new Date('2026-07-24T09:00:00+08:00').getTime();
