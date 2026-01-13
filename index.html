@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <canvas class="space-canvas" id="space-canvas" aria-hidden="true"></canvas>
+  <div class="page-glow" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo">ASTRONAUTS</div>
@@ -208,5 +210,74 @@
       </div>
     </div>
   </footer>
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.162.0/build/three.module.js";
+
+    const canvas = document.getElementById("space-canvas");
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 1200);
+    camera.position.z = 320;
+
+    const starGeometry = new THREE.BufferGeometry();
+    const starCount = 1400;
+    const positions = new Float32Array(starCount * 3);
+    const colors = new Float32Array(starCount * 3);
+    const color = new THREE.Color();
+
+    for (let i = 0; i < starCount; i += 1) {
+      const i3 = i * 3;
+      positions[i3] = (Math.random() - 0.5) * 900;
+      positions[i3 + 1] = (Math.random() - 0.5) * 720;
+      positions[i3 + 2] = (Math.random() - 0.4) * 900;
+
+      color.setHSL(0.58 + Math.random() * 0.08, 0.7, 0.75 + Math.random() * 0.15);
+      colors[i3] = color.r;
+      colors[i3 + 1] = color.g;
+      colors[i3 + 2] = color.b;
+    }
+
+    starGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    starGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+    const starMaterial = new THREE.PointsMaterial({
+      size: 2.2,
+      vertexColors: true,
+      depthWrite: false,
+      transparent: true,
+      opacity: 0.9,
+    });
+
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+
+    const glowGeometry = new THREE.SphereGeometry(320, 32, 32);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: 0x1e3a8a,
+      transparent: true,
+      opacity: 0.12,
+    });
+    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+    scene.add(glow);
+
+    const animate = () => {
+      stars.rotation.y += 0.0008;
+      stars.rotation.x += 0.0003;
+      glow.rotation.y -= 0.0005;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
