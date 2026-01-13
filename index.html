@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>ASTRONAUTS | 2026 台灣盃火箭競賽 3K社會組</title>
+    <meta name="description" content="太空人隊 - 2026台灣盃火箭競賽3K社會組，目標高度3000公尺">
+    <meta name="keywords" content="火箭, 台灣盃, 太空, rocket, Taiwan, TASA, 3K, Astronauts">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/main.css">
+
+    <style>
+        /* Custom Overrides */
+        :root {
+            --accent: #4A90E2;
+            --accent-orange: #F5A623;
+            --accent-green: #7ED321;
+            --dark: #1a1a2e;
+            --light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        /* Stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(2px 2px at 300px 150px, rgba(255,255,255,0.25), transparent),
+                radial-gradient(1px 1px at 370px 50px, rgba(255,255,255,0.35), transparent),
+                radial-gradient(2px 2px at 450px 180px, rgba(255,255,255,0.2), transparent);
+            background-size: 500px 200px;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Hero Enhancements */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/img/IMG_2111.jpg') center center / cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 100px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 12px;
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            padding-left: 12px;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0;
+            margin-top: 50px;
+        }
+
+        .countdown-group {
+            text-align: center;
+            padding: 0 12px;
+        }
+
+        .countdown-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            font-weight: 500;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .countdown-ms {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+            opacity: 0.6;
+            color: #fff;
+        }
+
+        .countdown-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+            opacity: 0.5;
+            color: #fff;
+            display: block;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+
+        .countdown-sep {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 300;
+            opacity: 0.3;
+            color: #fff;
+        }
+
+        /* Mission Cards */
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .mission-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px 30px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .mission-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .mission-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .mission-card h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .mission-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+        }
+
+        /* Engine Display */
+        .engine-section {
+            padding: 100px 40px;
+            background: linear-gradient(180deg, #0a0a1a 0%, #16100a 50%, #0a0a1a 100%);
+            text-align: center;
+        }
+
+        .engine-display {
+            max-width: 900px;
+            margin: 50px auto;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            background: rgba(249, 115, 22, 0.05);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .engine-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .spec-box .val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            color: var(--accent-orange);
+            margin-bottom: 5px;
+        }
+
+        .spec-box .lbl {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Knowledge Base Grid */
+        .kb-section {
+            padding: 100px 40px;
+            background: #0f1219;
+        }
+
+        .kb-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+
+        .kb-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .kb-card:hover {
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .kb-icon {
+            font-size: 32px;
+            min-width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .kb-info h4 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .kb-info p {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* Sponsors */
+        .sponsors-section {
+            background: linear-gradient(180deg, #0a0a1a 0%, #0a0a1a 100%);
+            padding: 100px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sponsors-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .sponsor-logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            padding: 20px 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .sponsor-logo:hover {
+            color: #fff;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 42px; letter-spacing: 4px; padding-left: 0; }
+            .countdown-value { font-size: 32px; }
+            .missions-grid, .engine-specs, .kb-grid, .stats-grid { grid-template-columns: 1fr; }
+            .kb-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body class="loaded">
+
+    <div class="stars"></div>
+
+    <nav class="navigation">
+        <a href="javascript:Navigation.scrollTo('.hero');" class="active"><span></span></a>
+        <a href="javascript:Navigation.scrollTo('.about');"><span></span></a>
+        <a href="javascript:Navigation.scrollTo('.missions');"><span></span></a>
+        <a href="javascript:Navigation.scrollTo('.engine-section');"><span></span></a>
+        <a href="javascript:Navigation.scrollTo('.kb-section');"><span></span></a>
+        <a href="javascript:Navigation.scrollTo('.team-section');"><span></span></a>
+        <a href="javascript:Navigation.scrollTo('.sponsors-section');"><span></span></a>
+    </nav>
+
+    <header class="hero">
+        <div class="steez-line"></div>
+        <div class="number">00001</div>
+
+        <div class="container">
+            <div class="logo"><img src="assets/img/logo.svg" alt="Astronauts" style="height: 60px;"></div>
+            <h1>ASTRONAUTS</h1>
+            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: 4px; color: rgba(255,255,255,0.5); margin-top: 20px; text-transform: uppercase;">2026 Taiwan Cup Rocket Competition · 3K Social Division</div>
+
+            <div class="countdown">
+                <div class="countdown-group">
+                    <span class="countdown-value" id="days">---</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-group">
+                    <span class="countdown-value" id="hours">--</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-group">
+                    <span class="countdown-value" id="minutes">--</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-group">
+                    <span class="countdown-value" id="seconds">--</span><span class="countdown-ms" id="ms">.0</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="viewport">
+
+        <section class="about about-active" id="about">
+            <div class="number">00002</div>
+            <div class="container">
+                <h3>太空人隊 <span>ASTRONAUTS TEAM</span></h3>
+                <div class="text">
+                    <p class="belief-label">Our Belief</p>
+                    <p class="glow">我們相信人類必須探索宇宙。我們相信植物不該只屬於地球。</p>
+                    <p>透過簡單、可靠、永續且可負擔的方式，讓每個人都能參與太空探索。每年挑戰火箭競賽，在每一次發射中學習、改進、突破。</p>
+                    <p>我們的終極目標——將種子送上太空，讓植物在星際間生長。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="hydrocode missions" id="missions">
+            <div class="number">00003</div>
+            <div class="container">
+                <div class="row">
+                    <div class="column-2">
+                        <h2>三大創新任務</h2>
+                        <p>2026 台灣盃火箭競賽，我們不只挑戰 3,000 公尺高度，更要驗證三項創新技術。</p>
+                    </div>
+                </div>
+
+                <div class="missions-grid">
+                    <div class="mission-card">
+                        <div class="mission-number">01</div>
+                        <h3>主動滾轉抑制</h3>
+                        <p>Canard Active Roll Control</p>
+                        <p style="margin-top: 12px; font-size: 13px; opacity: 0.7;">
+                            CP 前方設置四片可動式碳纖維鴨翼，搭配陀螺儀即時回授，將全彈道滾轉率控制在 ±3°/s 以內。
+                        </p>
+                    </div>
+                    <div class="mission-card">
+                        <div class="mission-number">02</div>
+                        <h3>金屬3D列印</h3>
+                        <p>Metal Additive Manufacturing</p>
+                        <p style="margin-top: 12px; font-size: 13px; opacity: 0.7;">
+                            導入金屬積層製造，引擎推力環與定心環一體成型，結構減重 42%，迭代週期縮短至 3 天。
+                        </p>
+                    </div>
+                    <div class="mission-card">
+                        <div class="mission-number">03</div>
+                        <h3>太空生物艙</h3>
+                        <p>Space Bio Capsule</p>
+                        <p style="margin-top: 12px; font-size: 13px; opacity: 0.7;">
+                            獨立減震生物艙搭載新鮮雞蛋與台灣原生種子，目標：24hr 雞蛋不破、72hr 種子發芽。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="engine-section" id="engine-section">
+            <div class="number">00004</div>
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 42px; color: #fff; margin-bottom: 20px;">PROPULSION</h2>
+            <p style="color: rgba(255,255,255,0.6);">Powered by Pioneer-10K Solid Rocket Motor</p>
+
+            <div class="engine-display">
+                <h3 style="font-size: 24px; color: #fff; margin-bottom: 30px;">PIONEER-10K</h3>
+                <div style="width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #F5A623, transparent); margin-bottom: 30px;"></div>
+
+                <div class="engine-specs">
+                    <div class="spec-box">
+                        <div class="val">9,311</div>
+                        <div class="lbl">Total Impulse (N·s)</div>
+                    </div>
+                    <div class="spec-box">
+                        <div class="val">2,139</div>
+                        <div class="lbl">Peak Thrust (N)</div>
+                    </div>
+                    <div class="spec-box">
+                        <div class="val">8.6</div>
+                        <div class="lbl">Burn Time (s)</div>
+                    </div>
+                    <div class="spec-box">
+                        <div class="val">1,232</div>
+                        <div class="lbl">Avg Thrust (N)</div>
+                    </div>
+                    <div class="spec-box">
+                        <div class="val">15.3</div>
+                        <div class="lbl">Total Mass (kg)</div>
+                    </div>
+                    <div class="spec-box">
+                        <div class="val">O</div>
+                        <div class="lbl">Class</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="flight-section" style="background: #151520; padding: 100px 40px; text-align: center;">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 42px; margin-bottom: 40px;">FLIGHT PROFILE</h2>
+            <img src="assets/img/Screenshot 2025-11-30 at 10.36.45 PM.png" alt="Flight Phases" style="max-width: 100%; border-radius: 8px; opacity: 0.9;">
+        </div>
+
+        <section class="kb-section" id="kb-section">
+            <div class="number">00005</div>
+            <div style="text-align: center;">
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 42px; color: #fff; margin-bottom: 16px;">KNOWLEDGE BASE</h2>
+                <p style="color: rgba(255,255,255,0.6);">Open Source Documentation for the Rocketry Community</p>
+            </div>
+
+            <div class="kb-grid">
+                <a href="risk.html" class="kb-card">
+                    <div class="kb-icon">⚠️</div>
+                    <div class="kb-info">
+                        <h4>Risk Management & FMEA</h4>
+                        <p>詳細的失效模式分析與風險緩解策略</p>
+                    </div>
+                </a>
+                <a href="requirements.html" class="kb-card">
+                    <div class="kb-icon">📋</div>
+                    <div class="kb-info">
+                        <h4>Requirements Matrix</h4>
+                        <p>任務需求追溯與決策分析矩陣</p>
+                    </div>
+                </a>
+                <a href="wind-tunnel.html" class="kb-card">
+                    <div class="kb-icon">💨</div>
+                    <div class="kb-info">
+                        <h4>Tesla Wind Tunnel</h4>
+                        <p>創新 Tesla 移動式風洞測試計畫</p>
+                    </div>
+                </a>
+                <a href="materials.html" class="kb-card">
+                    <div class="kb-icon">🛠️</div>
+                    <div class="kb-info">
+                        <h4>Materials & Parts</h4>
+                        <p>碳纖維箭體與回收系統材料規格</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <div class="team-section" id="team-section" style="background: #16213e; padding: 100px 40px; text-align: center;">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 42px; margin-bottom: 50px;">THE TEAM</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto;">
+                <div style="padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--accent);">
+                    <div style="font-weight: 600; font-size: 16px;">Frank Chen</div>
+                    <div style="font-size: 12px; color: var(--accent); margin-top: 4px;">CAPTAIN</div>
+                </div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.05);">
+                    <div style="font-weight: 600; font-size: 16px;">Justine Lu</div>
+                    <div style="font-size: 12px; opacity: 0.5; margin-top: 4px;">VICE CAPTAIN</div>
+                </div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.05);">
+                    <div style="font-weight: 600; font-size: 16px;">David Wei</div>
+                    <div style="font-size: 12px; opacity: 0.5; margin-top: 4px;">ADVISOR</div>
+                </div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Jimmy Lin</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Enoch Ho</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Danny Sun</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Leo Sun</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Peter Wu</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Ben Wu</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Morrie Huang</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Keng An</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Jobs Lu</div>
+                <div style="padding: 20px; background: rgba(255,255,255,0.02);">Wayne Chen</div>
+            </div>
+        </div>
+
+        <div style="background: #0a0a0a; padding: 100px 40px; text-align: center;">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 32px; color: rgba(255,255,255,0.5); margin-bottom: 40px;">MISSION TIMELINE</h2>
+            <div style="max-width: 600px; margin: 0 auto; text-align: left; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 30px;">
+                <div style="margin-bottom: 30px;">
+                    <span style="color: var(--accent-green); font-size: 12px;">COMPLETE</span>
+                    <h4 style="margin: 5px 0;">Team Formation & Registration</h4>
+                    <p style="font-size: 13px; opacity: 0.5;">Nov 2025</p>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <span style="color: var(--accent-orange); font-size: 12px;">IN PROGRESS</span>
+                    <h4 style="margin: 5px 0;">Design & Simulation Phase</h4>
+                    <p style="font-size: 13px; opacity: 0.5;">Dec 2025 - Jan 2026</p>
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <span style="color: rgba(255,255,255,0.3); font-size: 12px;">UPCOMING</span>
+                    <h4 style="margin: 5px 0;">Preliminary Design Review</h4>
+                    <p style="font-size: 13px; opacity: 0.5;">Feb 2026</p>
+                </div>
+                <div>
+                    <span style="color: rgba(255,255,255,0.3); font-size: 12px;">GOAL</span>
+                    <h4 style="margin: 5px 0;">Launch Day @ Pingtung</h4>
+                    <p style="font-size: 13px; opacity: 0.5;">July 2026</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sponsors-section" id="sponsors-section">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 36px;">SPONSORS</h2>
+            <p style="color: rgba(255,255,255,0.5); max-width: 500px; margin: 10px auto;">
+                Supporting the dream of civilian space exploration in Taiwan.
+            </p>
+            <div class="sponsors-grid">
+                <div class="sponsor-logo">Okase</div>
+                <div class="sponsor-logo">LOOT<span style="color: var(--accent-orange);">EX</span></div>
+                <div class="sponsor-logo">Agility</div>
+            </div>
+            <div style="margin-top: 60px;">
+                <a href="mailto:frank@okase.com" style="display: inline-block; padding: 12px 30px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; border-radius: 4px; transition: all 0.3s;">
+                    BECOME A SPONSOR
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="background: #050505; padding: 60px 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+        <p style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 10px;">ASTRONAUTS TEAM</p>
+        <p style="font-size: 12px; opacity: 0.5; margin-bottom: 30px;">2026 Taiwan Cup Rocket Competition · 3K Social Division</p>
+
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 13px;">
+            <a href="mailto:frank@okase.com" style="color: rgba(255,255,255,0.6); text-decoration: none;">Contact</a>
+            <span style="opacity: 0.2;">|</span>
+            <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none;">Instagram</a>
+            <span style="opacity: 0.2;">|</span>
+            <a href="#" style="color: rgba(255,255,255,0.6); text-decoration: none;">Threads</a>
+        </div>
+
+        <p style="margin-top: 40px; font-size: 10px; opacity: 0.3;">
+            &copy; 2026 Astronauts Team. Open Source Content Licensed under CC BY 4.0.
+        </p>
+    </footer>
+
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/jquery.min.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/waypoints.min.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Loader.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Parallax.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Navigation.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.js"></script>
+
+    <script>
+    // Countdown Timer
+    (function() {
+        const launchDate = new Date('2026-07-24T09:00:00+08:00').getTime();
+        function update() {
+            const now = Date.now();
+            const diff = launchDate - now;
+            if (diff <= 0) return;
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            const ds = Math.floor((diff % 1000) / 100);
+
+            document.getElementById('days').textContent = String(d).padStart(3, '0');
+            document.getElementById('hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+            document.getElementById('ms').textContent = '.' + ds;
+        }
+        setInterval(update, 100);
+        update();
+    })();
+    </script>
+
+</body>
+</html>
