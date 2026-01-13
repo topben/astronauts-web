@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Tesla 移動式風洞測試 | ASTRONAUTS</title>
+    <meta name="description" content="太空人隊創新空氣動力學測試方案：利用 Tesla Model S Plaid 進行火箭高速氣流測試">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/main.css">
+
+    <style>
+        /* Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        :root {
+            --accent: #4A90E2;
+            --accent-orange: #F5A623;
+            --accent-green: #7ED321;
+            --dark: #1a1a2e;
+            --light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+            background: #0a0a0a;
+        }
+
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 230px 80px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(2px 2px at 300px 150px, rgba(255,255,255,0.25), transparent),
+                radial-gradient(1px 1px at 370px 50px, rgba(255,255,255,0.35), transparent),
+                radial-gradient(2px 2px at 450px 180px, rgba(255,255,255,0.2), transparent);
+            background-size: 500px 200px;
+            animation: twinkle 8s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(180deg, #0a0a1a 0%, #0f1629 50%, #0a0a1a 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('img/unnamed.jpg') center center / cover;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        /* Back Link */
+        .back-link {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            padding: 60px 40px;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .stat-item h3 small {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .stat-item p {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Section Base */
+        .section {
+            padding: 100px 40px;
+        }
+
+        .section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .section .subtitle {
+            font-size: 16px;
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        /* Dark Section */
+        .section-dark {
+            background: linear-gradient(180deg, #0a0a1a 0%, #101828 50%, #0a0a1a 100%);
+            color: #fff;
+        }
+
+        .section-dark h2 {
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .section-dark .subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Light Section - now also dark */
+        .section-light {
+            background: linear-gradient(180deg, #0a0a1a 0%, #0d1420 50%, #0a0a1a 100%);
+            color: #fff;
+        }
+
+        .section-light h2 {
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .section-light .subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Value Comparison */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+        }
+
+        .value-card.traditional {
+            opacity: 0.6;
+        }
+
+        .value-card h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .value-card h3 span {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .value-card.tesla h3 span {
+            background: var(--accent);
+        }
+
+        .value-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .value-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        .value-list .label {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .value-list .value {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* Specs Grid */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .specs-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .specs-box h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .specs-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        .specs-row:last-child {
+            border-bottom: none;
+        }
+
+        .specs-row .label {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .specs-row .value {
+            color: #fff;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Chart Section */
+        .chart-container {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 50px;
+        }
+
+        .chart-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .velocity-comparison {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 40px;
+            height: 400px;
+            padding: 0 20px;
+        }
+
+        .velocity-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 140px;
+        }
+
+        .velocity-bar .bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .velocity-bar .bar:hover {
+            transform: scaleY(1.02);
+            filter: brightness(1.1);
+        }
+
+        .velocity-bar.rocket .bar {
+            background: linear-gradient(180deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
+            height: 350px;
+        }
+
+        .velocity-bar.tesla-max .bar {
+            background: linear-gradient(180deg, #4A90E2 0%, #357ABD 50%, #2563eb 100%);
+            height: 82px;
+        }
+
+        .velocity-bar.tesla-250 .bar {
+            background: linear-gradient(180deg, #4A90E2 0%, #357ABD 50%, #2563eb 100%);
+            height: 63px;
+        }
+
+        .velocity-bar.tesla-200 .bar {
+            background: linear-gradient(180deg, #4A90E2 0%, #357ABD 50%, #2563eb 100%);
+            height: 45px;
+        }
+
+        .velocity-bar.launch .bar {
+            background: linear-gradient(180deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+            height: 35px;
+        }
+
+        .velocity-bar .speed {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .velocity-bar .unit {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 4px;
+        }
+
+        .velocity-bar .label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 15px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .velocity-bar .sublabel {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4px;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-dot.rocket { background: #f97316; }
+        .legend-dot.tesla { background: #4A90E2; }
+        .legend-dot.launch { background: #22c55e; }
+
+        .test-coverage {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(74,144,226,0.1);
+            border: 1px solid rgba(74,144,226,0.3);
+            border-radius: 8px;
+        }
+
+        .test-coverage p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .test-coverage strong {
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Test Matrix */
+        .test-matrix {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .test-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .test-card:hover {
+            border-color: var(--accent);
+        }
+
+        .test-card-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .test-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: 24px;
+        }
+
+        .test-info h4 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .test-info p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .test-card-body {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .test-metric {
+            text-align: center;
+        }
+
+        .test-metric .value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .test-metric .label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+        }
+
+        /* Mount Design */
+        .mount-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mount-visual {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 40px;
+            font-family: monospace;
+            color: rgba(255,255,255,0.8);
+            white-space: pre;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        .mount-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .mount-spec-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .mount-spec-item .value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .mount-spec-item .label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Safety */
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .safety-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+        }
+
+        .safety-card h3 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .safety-card h3 .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .safety-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .safety-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .safety-list li::before {
+            content: '□';
+            color: var(--accent);
+        }
+
+        /* Budget */
+        .budget-table {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .budget-row:last-child {
+            border-bottom: none;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .budget-row .label {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .budget-row .value {
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .budget-row:last-child .label,
+        .budget-row:last-child .value {
+            color: #fff;
+        }
+
+        /* Marketing */
+        .marketing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .marketing-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .marketing-card .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .marketing-card h4 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .marketing-card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid,
+            .specs-grid,
+            .safety-grid,
+            .marketing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .test-card-body {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mount-specs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .section h2 {
+                font-size: 32px;
+            }
+
+            .stat-item h3 {
+                font-size: 32px;
+            }
+
+            .test-card-body {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="loaded">
+
+    <div class="stars"></div>
+
+    <a href="index.html" class="back-link">&larr; BACK TO MAIN</a>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; position: relative;">
+        <div style="position: relative; z-index: 1; text-align: center; padding: 80px 40px; display: flex; flex-direction: column; align-items: center; gap: 30px;">
+            <div style="font-family: 'Space Grotesk', sans-serif; color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 4px; text-transform: uppercase;">Astronauts Team · Aerodynamics Test Plan</div>
+            <h1 style="font-family: 'Orbitron', sans-serif; font-size: 56px; font-weight: 700; letter-spacing: 8px; line-height: 1.2; margin: 0; color: #fff; text-align: center;"><span style="color: #4A90E2;">TESLA</span><br>WIND TUNNEL</h1>
+            <p style="color: rgba(255,255,255,0.8); font-size: 24px; margin: 0; line-height: 1.6; text-align: center;">
+                利用 <strong style="color: #fff;">Tesla Model S Plaid</strong> 作為移動式風洞平台<br>
+                進行火箭空氣動力學實測
+            </p>
+        </div>
+    </header>
+
+    <div id="viewport">
+
+        <!-- ========== STATS ========== -->
+        <div class="stats-banner">
+            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="stat-item">
+                    <h3>260<small>km/h</small></h3>
+                    <p>Tesla 載重極速</p>
+                </div>
+                <div class="stat-item">
+                    <h3>2.7<small>m</small></h3>
+                    <p>Full-Size Rocket</p>
+                </div>
+                <div class="stat-item">
+                    <h3>1,020<small>hp</small></h3>
+                    <p>Tri-Motor Power</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TEST ITEMS ========== -->
+        <section class="section section-dark">
+            <div class="number">00002</div>
+            <h2 style="text-align: center;">測試項目</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                七大核心測試項目全面驗證火箭系統
+            </p>
+
+            <div class="test-matrix">
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">01</div>
+                        <div class="test-info">
+                            <h4>結構震動耐久測試</h4>
+                            <p>驗證箭體在高速氣流與震動環境下的結構完整性，確保不會解體</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">8.4 G</div>
+                            <div class="label">模擬加速度</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">0 裂縫</div>
+                            <div class="label">通過標準</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">30 min</div>
+                            <div class="label">持續測試</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">260 km/h</div>
+                            <div class="label">極限速度</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">02</div>
+                        <div class="test-info">
+                            <h4>鴨翼滾轉控制測試</h4>
+                            <p>驗證 Canard Active Roll Control 系統在真實氣流中的表現</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">&lt; 50ms</div>
+                            <div class="label">舵機響應</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">±3°/s</div>
+                            <div class="label">滾轉控制</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">7 組</div>
+                            <div class="label">測試案例</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">260 km/h</div>
+                            <div class="label">極限速度</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">03</div>
+                        <div class="test-info">
+                            <h4>遠距即時通訊測試</h4>
+                            <p>驗證 LoRa 433MHz 模組在 3km 距離下即時回傳飛行數據的能力</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">3+ km</div>
+                            <div class="label">通訊距離</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">&lt; 1%</div>
+                            <div class="label">丟包率</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">即時</div>
+                            <div class="label">數據回傳</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">10 Hz</div>
+                            <div class="label">更新頻率</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">04</div>
+                        <div class="test-info">
+                            <h4>IMU 慣性感測器測試</h4>
+                            <p>評估九軸 IMU 在高速震動環境下的姿態數據精準度</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">ICM-20948</div>
+                            <div class="label">感測器型號</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">±0.5°</div>
+                            <div class="label">角度誤差</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">1000 Hz</div>
+                            <div class="label">取樣率</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">9 軸</div>
+                            <div class="label">感測維度</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">05</div>
+                        <div class="test-info">
+                            <h4>氣壓高度計測試</h4>
+                            <p>驗證 BMP388 氣壓計在高速氣流干擾下的高度量測準確性</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">BMP388</div>
+                            <div class="label">感測器型號</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">±0.5m</div>
+                            <div class="label">高度精度</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">200 Hz</div>
+                            <div class="label">取樣率</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">濾波</div>
+                            <div class="label">抗干擾</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">06</div>
+                        <div class="test-info">
+                            <h4>GPS 追蹤精度測試</h4>
+                            <p>驗證公版 GPS 追蹤器在高速移動下的定位精度與更新率</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">&lt; 3m</div>
+                            <div class="label">定位誤差</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">10 Hz</div>
+                            <div class="label">更新率</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">冷啟動</div>
+                            <div class="label">定位測試</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">260 km/h</div>
+                            <div class="label">移動速度</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-header">
+                        <div class="test-number">07</div>
+                        <div class="test-info">
+                            <h4>航電系統整合測試</h4>
+                            <p>全系統整合測試，驗證所有感測器與通訊模組協同運作</p>
+                        </div>
+                    </div>
+                    <div class="test-card-body">
+                        <div class="test-metric">
+                            <div class="value">6 模組</div>
+                            <div class="label">整合數量</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">同步</div>
+                            <div class="label">時間校正</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">SD 卡</div>
+                            <div class="label">數據記錄</div>
+                        </div>
+                        <div class="test-metric">
+                            <div class="value">完整</div>
+                            <div class="label">飛行模擬</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== VALUE COMPARISON ========== -->
+        <section class="section section-dark">
+            <div class="number">00003</div>
+            <h2 style="text-align: center;">為什麼用 Tesla？</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                創新低成本空氣動力學測試方案
+            </p>
+
+            <div class="value-grid">
+                <div class="value-card traditional">
+                    <h3>傳統風洞 <span>HIGH COST</span></h3>
+                    <ul class="value-list">
+                        <li><span class="label">費用</span><span class="value">NT$ 30,000-80,000/hr</span></li>
+                        <li><span class="label">尺寸限制</span><span class="value">通常 &lt; 1m</span></li>
+                        <li><span class="label">預約時間</span><span class="value">需提前數週</span></li>
+                        <li><span class="label">氣流類型</span><span class="value">人工氣流</span></li>
+                        <li><span class="label">數據類型</span><span class="value">靜態數據</span></li>
+                    </ul>
+                </div>
+                <div class="value-card tesla">
+                    <h3>Tesla 移動風洞 <span>INNOVATIVE</span></h3>
+                    <ul class="value-list">
+                        <li><span class="label">費用</span><span class="value">場地費 + 電費 ≈ NT$ 5,000</span></li>
+                        <li><span class="label">尺寸限制</span><span class="value">全尺寸 2.7m 火箭</span></li>
+                        <li><span class="label">預約時間</span><span class="value">隨時可測</span></li>
+                        <li><span class="label">氣流類型</span><span class="value">真實大氣環境</span></li>
+                        <li><span class="label">數據類型</span><span class="value">動態響應數據</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== VELOCITY CHART ========== -->
+        <section class="section section-dark" style="padding-top: 0;">
+            <div class="chart-container">
+                <div class="chart-title">速度對照：Tesla vs 火箭飛行階段</div>
+
+                <div class="velocity-comparison">
+                    <div class="velocity-bar rocket">
+                        <div class="bar">
+                            <span class="speed">310</span>
+                            <span class="unit">m/s</span>
+                        </div>
+                        <div class="label">火箭最高速度</div>
+                        <div class="sublabel">Mach 0.92</div>
+                    </div>
+
+                    <div class="velocity-bar tesla-max">
+                        <div class="bar">
+                            <span class="speed">72</span>
+                            <span class="unit">m/s</span>
+                        </div>
+                        <div class="label">Tesla 載重極限</div>
+                        <div class="sublabel">260 km/h</div>
+                    </div>
+
+                    <div class="velocity-bar tesla-250">
+                        <div class="bar">
+                            <span class="speed">56</span>
+                            <span class="unit">m/s</span>
+                        </div>
+                        <div class="label">Tesla 200</div>
+                        <div class="sublabel">200 km/h</div>
+                    </div>
+
+                    <div class="velocity-bar tesla-200">
+                        <div class="bar">
+                            <span class="speed">42</span>
+                            <span class="unit">m/s</span>
+                        </div>
+                        <div class="label">Tesla 150</div>
+                        <div class="sublabel">150 km/h</div>
+                    </div>
+
+                    <div class="velocity-bar launch">
+                        <div class="bar">
+                            <span class="speed">30</span>
+                            <span class="unit">m/s</span>
+                        </div>
+                        <div class="label">火箭離軌</div>
+                        <div class="sublabel">108 km/h</div>
+                    </div>
+                </div>
+
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot rocket"></div>
+                        <span>火箭飛行速度</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot tesla"></div>
+                        <span>Tesla 測試速度</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot launch"></div>
+                        <span>發射離軌階段</span>
+                    </div>
+                </div>
+
+                <div class="test-coverage">
+                    <p>Tesla 載重狀態可覆蓋火箭飛行 <strong>T+0 ~ T+4 秒</strong> 的速度區間（約 23% 最高速度）</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SPECS ========== -->
+        <section class="section section-light">
+            <div class="number">00005</div>
+            <h2 style="text-align: center;">系統參數</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                火箭與 Tesla 技術規格
+            </p>
+
+            <div class="specs-grid">
+                <div class="specs-box">
+                    <h3>火箭 t3 規格</h3>
+                    <div class="specs-row"><span class="label">總長度</span><span class="value">270 cm (2.7 m)</span></div>
+                    <div class="specs-row"><span class="label">最大直徑</span><span class="value">154 mm</span></div>
+                    <div class="specs-row"><span class="label">乾質量</span><span class="value">11.0 kg</span></div>
+                    <div class="specs-row"><span class="label">濕質量</span><span class="value">26.3 kg</span></div>
+                    <div class="specs-row"><span class="label">穩定裕度</span><span class="value">1.73 cal</span></div>
+                    <div class="specs-row"><span class="label">最大速度</span><span class="value">310 m/s (Mach 0.92)</span></div>
+                    <div class="specs-row"><span class="label">最大加速度</span><span class="value">82.2 m/s² (8.4 G)</span></div>
+                </div>
+                <div class="specs-box">
+                    <h3>Tesla Model S Plaid</h3>
+                    <div class="specs-row"><span class="label">載重極速</span><span class="value">260 km/h (72 m/s)</span></div>
+                    <div class="specs-row"><span class="label">0-100 km/h</span><span class="value">2.1 秒</span></div>
+                    <div class="specs-row"><span class="label">最大馬力</span><span class="value">1,020 hp (三馬達)</span></div>
+                    <div class="specs-row"><span class="label">車身重量</span><span class="value">2,190 kg</span></div>
+                    <div class="specs-row"><span class="label">車長</span><span class="value">5.02 m</span></div>
+                    <div class="specs-row"><span class="label">軸距</span><span class="value">2.96 m</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== MOUNT DESIGN ========== -->
+        <section class="section section-light">
+            <div class="number">00006</div>
+            <h2 style="text-align: center;">車頂架設計</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                橫向安裝配置，三重固定保險
+            </p>
+
+            <div class="mount-section">
+                <div class="mount-visual">                        ← 氣流方向 (車輛前進反向)
+
+        ╔═══════════════════════════════════════════╗
+        ║  ◄─────────── 2.7m 火箭 ──────────────►   ║
+        ║                                           ║
+        ║  ▲鼻錐    [航電艙]  [回收艙]  [引擎段]▲尾翼 ║
+        ╚═══════════════════════════════════════════╝
+                ↑                    ↑
+              前支架              後支架
+               │                    │
+        ┌──────┴────────────────────┴──────┐
+        │           Tesla 車頂              │
+        │  ┌─────────────────────────────┐ │
+        │  │        全景玻璃車頂          │ │
+        │  └─────────────────────────────┘ │
+        └──────────────────────────────────┘
+
+                 ══════════════►
+                   行進方向</div>
+
+                <div class="mount-specs">
+                    <div class="mount-spec-item">
+                        <div class="value">6.3 kg</div>
+                        <div class="label">支架總重</div>
+                    </div>
+                    <div class="mount-spec-item">
+                        <div class="value">1.49%</div>
+                        <div class="label">車輛增重比</div>
+                    </div>
+                    <div class="mount-spec-item">
+                        <div class="value">1.7 cm</div>
+                        <div class="label">重心上升</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SAFETY ========== -->
+        <section class="section section-dark">
+            <div class="number">00007</div>
+            <h2 style="text-align: center;">安全規範</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                嚴格的安全檢查與分級測試程序
+            </p>
+
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <h3><span class="icon">1</span>必要安全裝備</h3>
+                    <ul class="safety-list">
+                        <li>安全帽 (ECE/Snell 認證) × 2</li>
+                        <li>防火衣 (賽車等級) × 2</li>
+                        <li>滅火器 ABC 乾粉 2kg × 2</li>
+                        <li>對講機 UHF 頻段 × 3</li>
+                        <li>警示三角 + LED 爆閃燈</li>
+                    </ul>
+                </div>
+                <div class="safety-card">
+                    <h3><span class="icon">2</span>出發前檢查</h3>
+                    <ul class="safety-list">
+                        <li>車輛電量 &gt; 80%</li>
+                        <li>輪胎胎壓正常</li>
+                        <li>支架螺絲鎖緊 (扭力扳手)</li>
+                        <li>束帶張力正常</li>
+                        <li>天氣確認 (風速 &lt; 10 m/s)</li>
+                    </ul>
+                </div>
+                <div class="safety-card">
+                    <h3><span class="icon">3</span>速度分級測試</h3>
+                    <ul class="safety-list">
+                        <li>Phase 1: 100 km/h 首次驗證</li>
+                        <li>Phase 2: 150 km/h 固定穩定後</li>
+                        <li>Phase 3: 200 km/h 無異常後</li>
+                        <li>Phase 4: 250 km/h 工程師確認</li>
+                        <li>Phase 5: 300+ km/h 團隊共識</li>
+                    </ul>
+                </div>
+                <div class="safety-card">
+                    <h3><span class="icon">4</span>緊急程序</h3>
+                    <ul class="safety-list">
+                        <li>火箭脫落：立即減速停車</li>
+                        <li>車輛故障：滑行至安全區域</li>
+                        <li>人員受傷：通報場地救護</li>
+                        <li>開啟警示燈並設置三角牌</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== BUDGET ========== -->
+        <section class="section section-light">
+            <div class="number">00007</div>
+            <h2 style="text-align: center;">預算估計</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                相比傳統風洞節省 NT$ 50,000 以上
+            </p>
+
+            <div class="budget-table">
+                <div class="budget-row"><span class="label">車頂架材料</span><span class="value">NT$ 8,000</span></div>
+                <div class="budget-row"><span class="label">安全裝備</span><span class="value">NT$ 5,000</span></div>
+                <div class="budget-row"><span class="label">場地租借 (麗寶賽車場)</span><span class="value">NT$ 40,000</span></div>
+                <div class="budget-row"><span class="label">交通油電</span><span class="value">NT$ 3,000</span></div>
+                <div class="budget-row"><span class="label">餐飲</span><span class="value">NT$ 2,000</span></div>
+                <div class="budget-row"><span class="label">總計</span><span class="value">NT$ 58,000</span></div>
+            </div>
+        </section>
+
+        <!-- ========== MARKETING ========== -->
+        <section class="section section-dark">
+            <div class="number">00008</div>
+            <h2 style="text-align: center;">行銷價值</h2>
+            <p class="subtitle" style="text-align: center; margin: 0 auto 50px;">
+                創造話題性內容與媒體曝光機會
+            </p>
+
+            <div class="marketing-grid">
+                <div class="marketing-card">
+                    <div class="icon">🎬</div>
+                    <h4>影片素材</h4>
+                    <p>30 秒 Highlight 社群影片<br>5 分鐘 YouTube 技術解說</p>
+                </div>
+                <div class="marketing-card">
+                    <div class="icon">📸</div>
+                    <h4>照片素材</h4>
+                    <p>Tesla + 火箭合影<br>高速行駛動態攝影</p>
+                </div>
+                <div class="marketing-card">
+                    <div class="icon">📰</div>
+                    <h4>媒體曝光</h4>
+                    <p>科技新報、數位時代<br>Tesla 社群、TASA 合作</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="font-size: 24px; color: rgba(255,255,255,0.8); font-style: italic;">
+                    「台灣首創：電動車移動風洞測試火箭」
+                </p>
+                <p style="font-size: 18px; color: rgba(255,255,255,0.5); margin-top: 10px;">
+                    Tesla × Rocket: When SpaceX Spirit Meets Taiwan's Space Dream
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <p><b>ASTRONAUTS TEAM</b> · 太空人隊</p>
+        <p>Tesla 移動式風洞測試計畫 v1.0 · 2025/12/27</p>
+        <p><a href="index.html">← 返回主頁</a></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/jquery.min.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/waypoints.min.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Loader.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Parallax.js"></script>
+    <script src="./Brandon Johnson Planetary Scientist _ Brand-On Johns-On_files/brandon.Navigation.js"></script>
+
+</body>
+</html>

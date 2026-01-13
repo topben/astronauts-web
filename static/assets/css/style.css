@@ -13,6 +13,8 @@ body {
   background: #05060f;
   color: #f8fafc;
   line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
 }
 
 a {
@@ -40,20 +42,28 @@ h1, h2, h3, h4 {
 
 .space-canvas {
   position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .page-glow {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.18), transparent 55%),
     radial-gradient(circle at 80% 0%, rgba(129, 140, 248, 0.12), transparent 45%),
     radial-gradient(circle at 50% 80%, rgba(14, 116, 144, 0.2), transparent 55%);
   pointer-events: none;
-  z-index: -1;
+  z-index: 2;
 }
 
 /* ===== Header ===== */
@@ -66,6 +76,7 @@ h1, h2, h3, h4 {
   background: rgba(5, 6, 15, 0.72);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  pointer-events: auto;
 }
 
 .header-inner {
@@ -92,11 +103,27 @@ h1, h2, h3, h4 {
   font-size: 14px;
   font-weight: 500;
   color: rgba(226, 232, 240, 0.75);
-  transition: color 0.2s;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #38bdf8);
+  transition: width 0.3s ease;
 }
 
 .nav a:hover {
   color: #fff;
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .cta {
@@ -106,13 +133,19 @@ h1, h2, h3, h4 {
   color: #fff;
   font-weight: 600;
   font-size: 14px;
-  border-radius: 4px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 28px rgba(56, 189, 248, 0.4);
+  opacity: 0.95;
+}
+
+.cta:active {
+  transform: translateY(0);
 }
 
 .ghost {
@@ -122,13 +155,15 @@ h1, h2, h3, h4 {
   color: #fff;
   font-weight: 500;
   font-size: 14px;
-  border-radius: 4px;
-  transition: border-color 0.2s, background 0.2s;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
 }
 
 .ghost:hover {
   border-color: rgba(226, 232, 240, 0.7);
-  background: rgba(148, 163, 184, 0.08);
+  background: rgba(148, 163, 184, 0.1);
+  transform: translateY(-1px);
 }
 
 /* ===== Hero ===== */
@@ -139,14 +174,16 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   position: relative;
+  z-index: 10;
 }
 
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.3) 45%, rgba(15, 23, 42, 0.7) 100%);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.2) 45%, rgba(15, 23, 42, 0.4) 100%);
   z-index: -1;
+  pointer-events: none;
 }
 
 .hero-grid {
@@ -212,11 +249,14 @@ h1, h2, h3, h4 {
 
 /* Hero Card */
 .hero-card {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.65) 0%, rgba(30, 41, 59, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.45);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.35);
+  position: relative;
+  z-index: 11;
 }
 
 .card-inner h3 {
@@ -265,11 +305,13 @@ h1, h2, h3, h4 {
 /* ===== Sections ===== */
 .section {
   padding: 100px 0;
+  position: relative;
+  z-index: 10;
 }
 
 .section.dark {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(6px);
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(3px);
 }
 
 .section h2 {
@@ -305,9 +347,17 @@ h1, h2, h3, h4 {
 
 .highlight {
   padding: 24px;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 8px;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.highlight:hover {
+  transform: translateX(4px);
+  border-color: rgba(125, 211, 252, 0.3);
+  background: rgba(15, 23, 42, 0.7);
 }
 
 .highlight h4 {
@@ -331,9 +381,17 @@ h1, h2, h3, h4 {
 
 .benefit {
   padding: 32px;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
   border: 1px solid rgba(148, 163, 184, 0.14);
   border-radius: 8px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.4);
 }
 
 .benefit h4 {
@@ -375,15 +433,17 @@ h1, h2, h3, h4 {
 
 .tier {
   padding: 32px;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 12px;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tier:hover {
   transform: translateY(-4px);
   border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 12px 32px rgba(56, 189, 248, 0.15);
 }
 
 .tier h3 {
@@ -469,6 +529,12 @@ h1, h2, h3, h4 {
   font-size: 18px;
   display: block;
   margin: 16px 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-card a:hover {
+  color: #38bdf8;
+  transform: translateX(4px);
 }
 
 .contact-note {
@@ -479,9 +545,12 @@ h1, h2, h3, h4 {
 
 /* ===== Footer ===== */
 .site-footer {
-  background: rgba(5, 6, 15, 0.9);
+  background: rgba(5, 6, 15, 0.7);
+  backdrop-filter: blur(4px);
   padding: 48px 0;
   border-top: 1px solid rgba(148, 163, 184, 0.12);
+  position: relative;
+  z-index: 10;
 }
 
 .footer-inner {

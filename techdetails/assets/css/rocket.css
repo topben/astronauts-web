@@ -1,0 +1,755 @@
+/* ========================================
+   ASTRONAUTS TEAM - Rocket Website Styles
+   ======================================== */
+
+/* Reset & Base */
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Noto Sans TC', 'Space Mono', sans-serif;
+	background: #0a0a0a;
+	color: #ffffff;
+	line-height: 1.6;
+	overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+	font-family: 'Space Mono', monospace;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+	.container {
+		padding: 0 20px;
+	}
+}
+
+/* ========================================
+   Navigation Dots
+   ======================================== */
+.nav-dots {
+	position: fixed;
+	right: 30px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.nav-dots a {
+	display: block;
+	width: 12px;
+	height: 12px;
+	border: 1px solid rgba(255,255,255,0.3);
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.nav-dots a span {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: transparent;
+	transition: all 0.3s ease;
+}
+
+.nav-dots a:hover span,
+.nav-dots a.active span {
+	background: #fff;
+}
+
+.nav-dots a.active {
+	border-color: #fff;
+}
+
+@media (max-width: 768px) {
+	.nav-dots {
+		right: 15px;
+	}
+	.nav-dots a {
+		width: 8px;
+		height: 8px;
+	}
+}
+
+/* ========================================
+   Section Base
+   ======================================== */
+.section {
+	min-height: 100vh;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 100px 0;
+}
+
+.section-number {
+	position: absolute;
+	right: 40px;
+	top: 40px;
+	font-family: 'Space Mono', monospace;
+	font-size: 12px;
+	color: rgba(255,255,255,0.2);
+	letter-spacing: 2px;
+}
+
+.section-title {
+	font-size: 48px;
+	margin-bottom: 16px;
+	text-align: center;
+}
+
+.section-desc {
+	font-size: 16px;
+	color: rgba(255,255,255,0.6);
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+	.section {
+		padding: 80px 0;
+	}
+	.section-title {
+		font-size: 32px;
+	}
+	.section-desc {
+		font-size: 14px;
+		margin-bottom: 40px;
+	}
+}
+
+/* ========================================
+   HERO Section
+   ======================================== */
+.hero {
+	background: #000;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url('../img/bg-hero.jpg') center center / cover no-repeat;
+	opacity: 0.5;
+}
+
+.hero-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.hero-content {
+	position: relative;
+	z-index: 10;
+	text-align: center;
+	padding: 0 20px;
+}
+
+.hero-label {
+	font-family: 'Space Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 4px;
+	color: rgba(255,255,255,0.5);
+	margin-bottom: 40px;
+}
+
+/* Countdown */
+.countdown {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 8px;
+	margin-bottom: 50px;
+}
+
+.countdown-group {
+	text-align: center;
+}
+
+.countdown-value {
+	font-family: 'Space Mono', monospace;
+	font-size: 72px;
+	font-weight: 700;
+	line-height: 1;
+	display: block;
+}
+
+.countdown-ms {
+	font-family: 'Space Mono', monospace;
+	font-size: 32px;
+	font-weight: 400;
+	color: rgba(255,255,255,0.5);
+	vertical-align: top;
+}
+
+.countdown-label {
+	font-family: 'Space Mono', monospace;
+	font-size: 10px;
+	letter-spacing: 2px;
+	color: rgba(255,255,255,0.4);
+	display: block;
+	margin-top: 8px;
+}
+
+.countdown-separator {
+	font-family: 'Space Mono', monospace;
+	font-size: 48px;
+	font-weight: 700;
+	color: rgba(255,255,255,0.3);
+	line-height: 1;
+	padding-top: 10px;
+}
+
+.countdown-seconds {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.countdown-seconds .countdown-label {
+	width: 100%;
+}
+
+@media (max-width: 768px) {
+	.countdown-value {
+		font-size: 36px;
+	}
+	.countdown-ms {
+		font-size: 18px;
+	}
+	.countdown-separator {
+		font-size: 28px;
+	}
+	.countdown {
+		gap: 4px;
+	}
+}
+
+.hero-title {
+	font-size: 120px;
+	letter-spacing: 0.2em;
+	margin-bottom: 16px;
+	text-shadow: 0 0 60px rgba(255,255,255,0.2);
+}
+
+.hero-subtitle {
+	font-family: 'Space Mono', monospace;
+	font-size: 14px;
+	letter-spacing: 6px;
+	color: rgba(255,255,255,0.6);
+}
+
+.hero-scroll {
+	position: absolute;
+	bottom: 60px;
+	left: 50%;
+	transform: translateX(-50%);
+	animation: bounce 2s infinite;
+}
+
+.hero-scroll a {
+	display: block;
+	opacity: 0.5;
+	transition: opacity 0.3s;
+}
+
+.hero-scroll a:hover {
+	opacity: 1;
+}
+
+.icon-arrow {
+	width: 24px;
+	height: 24px;
+	fill: #fff;
+}
+
+@keyframes bounce {
+	0%, 100% { transform: translateX(-50%) translateY(0); }
+	50% { transform: translateX(-50%) translateY(10px); }
+}
+
+.hero-side-text {
+	position: absolute;
+	right: 40px;
+	bottom: 100px;
+	writing-mode: vertical-rl;
+	font-size: 14px;
+	letter-spacing: 4px;
+	color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 768px) {
+	.hero-title {
+		font-size: 48px;
+		letter-spacing: 0.1em;
+	}
+	.hero-subtitle {
+		font-size: 11px;
+		letter-spacing: 3px;
+	}
+	.hero-side-text {
+		display: none;
+	}
+}
+
+/* ========================================
+   MISSION Section
+   ======================================== */
+.mission {
+	background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+}
+
+.stats-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 24px;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.stat-card {
+	background: rgba(255,255,255,0.03);
+	border: 1px solid rgba(255,255,255,0.1);
+	padding: 40px 24px;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+	border-color: rgba(255,255,255,0.3);
+	background: rgba(255,255,255,0.05);
+}
+
+.stat-card.highlight {
+	border-color: #ff6600;
+	background: rgba(255,102,0,0.1);
+}
+
+.stat-value {
+	font-family: 'Space Mono', monospace;
+	font-size: 48px;
+	font-weight: 700;
+	display: block;
+	margin-bottom: 8px;
+}
+
+.stat-value small {
+	font-size: 20px;
+	font-weight: 400;
+	opacity: 0.6;
+}
+
+.stat-label {
+	font-family: 'Space Mono', monospace;
+	font-size: 11px;
+	letter-spacing: 2px;
+	color: rgba(255,255,255,0.5);
+	display: block;
+	margin-bottom: 8px;
+}
+
+.stat-desc {
+	font-size: 12px;
+	color: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 768px) {
+	.stats-row {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 16px;
+	}
+	.stat-card {
+		padding: 24px 16px;
+	}
+	.stat-value {
+		font-size: 32px;
+	}
+}
+
+/* ========================================
+   ROCKET Section
+   ======================================== */
+.rocket {
+	background: #000;
+}
+
+.rocket-showcase {
+	display: grid;
+	grid-template-columns: 1fr 400px;
+	gap: 60px;
+	align-items: center;
+}
+
+.rocket-image {
+	background: rgba(255,255,255,0.02);
+	border: 1px solid rgba(255,255,255,0.1);
+	padding: 40px;
+	border-radius: 4px;
+}
+
+.rocket-image img {
+	width: 100%;
+	height: auto;
+}
+
+.rocket-specs {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.spec-group h3 {
+	font-size: 12px;
+	letter-spacing: 3px;
+	color: rgba(255,255,255,0.4);
+	margin-bottom: 16px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.spec-item {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.spec-key {
+	font-size: 13px;
+	color: rgba(255,255,255,0.5);
+}
+
+.spec-val {
+	font-family: 'Space Mono', monospace;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+@media (max-width: 960px) {
+	.rocket-showcase {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+	.rocket-specs {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+}
+
+@media (max-width: 768px) {
+	.rocket-specs {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ========================================
+   TEAM Section
+   ======================================== */
+.team {
+	background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+}
+
+.team-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 16px;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.team-member {
+	background: rgba(255,255,255,0.03);
+	border: 1px solid rgba(255,255,255,0.1);
+	padding: 20px 12px;
+	text-align: center;
+	font-size: 14px;
+	transition: all 0.3s ease;
+}
+
+.team-member:hover {
+	border-color: rgba(255,255,255,0.3);
+	background: rgba(255,255,255,0.05);
+}
+
+@media (max-width: 960px) {
+	.team-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.team-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.team-member {
+		font-size: 13px;
+		padding: 16px 8px;
+	}
+}
+
+/* ========================================
+   TIMELINE Section
+   ======================================== */
+.timeline-section {
+	background: #0a0a0a;
+}
+
+.timeline {
+	max-width: 600px;
+	margin: 0 auto;
+	position: relative;
+	padding-left: 40px;
+}
+
+.timeline::before {
+	content: '';
+	position: absolute;
+	left: 7px;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: rgba(255,255,255,0.1);
+}
+
+.timeline-item {
+	position: relative;
+	padding-bottom: 40px;
+	display: flex;
+	gap: 24px;
+}
+
+.timeline-item::before {
+	content: '';
+	position: absolute;
+	left: -40px;
+	top: 4px;
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255,255,255,0.3);
+	border-radius: 50%;
+	background: #0a0a0a;
+}
+
+.timeline-item.done::before {
+	background: #4CAF50;
+	border-color: #4CAF50;
+}
+
+.timeline-item.current::before {
+	background: #ff6600;
+	border-color: #ff6600;
+	box-shadow: 0 0 20px rgba(255,102,0,0.5);
+}
+
+.timeline-item.launch::before {
+	background: #fff;
+	border-color: #fff;
+}
+
+.timeline-date {
+	font-family: 'Space Mono', monospace;
+	font-size: 12px;
+	color: rgba(255,255,255,0.4);
+	min-width: 100px;
+}
+
+.timeline-content h4 {
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
+.timeline-content p {
+	font-size: 13px;
+	color: rgba(255,255,255,0.5);
+}
+
+.timeline-item.launch h4 {
+	color: #ff6600;
+}
+
+@media (max-width: 600px) {
+	.timeline {
+		padding-left: 30px;
+	}
+	.timeline-item::before {
+		left: -30px;
+		width: 12px;
+		height: 12px;
+	}
+	.timeline-item {
+		flex-direction: column;
+		gap: 8px;
+	}
+}
+
+/* ========================================
+   SUPPORT Section
+   ======================================== */
+.support {
+	background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+}
+
+.funding-progress {
+	max-width: 500px;
+	margin: 0 auto 60px;
+}
+
+.funding-bar {
+	height: 4px;
+	background: rgba(255,255,255,0.1);
+	border-radius: 2px;
+	overflow: hidden;
+	margin-bottom: 16px;
+}
+
+.funding-fill {
+	height: 100%;
+	background: linear-gradient(90deg, #ff6600, #ff9933);
+	border-radius: 2px;
+	transition: width 1s ease;
+}
+
+.funding-info {
+	text-align: center;
+	font-family: 'Space Mono', monospace;
+}
+
+.funding-raised {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.funding-goal {
+	font-size: 14px;
+	color: rgba(255,255,255,0.4);
+}
+
+.support-cta {
+	text-align: center;
+}
+
+.support-cta p {
+	font-size: 14px;
+	color: rgba(255,255,255,0.5);
+	margin-bottom: 24px;
+}
+
+.btn-contact {
+	display: inline-block;
+	font-family: 'Space Mono', monospace;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 3px;
+	padding: 16px 48px;
+	border: 1px solid #fff;
+	transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+	background: #fff;
+	color: #000;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer {
+	background: #000;
+	padding: 80px 0;
+	text-align: center;
+}
+
+.footer-social {
+	display: flex;
+	justify-content: center;
+	gap: 32px;
+	margin-bottom: 32px;
+}
+
+.footer-social a {
+	opacity: 0.5;
+	transition: opacity 0.3s;
+}
+
+.footer-social a:hover {
+	opacity: 1;
+}
+
+.footer-social .icon {
+	width: 24px;
+	height: 24px;
+	fill: #fff;
+}
+
+.footer-contact {
+	margin-bottom: 24px;
+}
+
+.footer-contact a {
+	font-family: 'Space Mono', monospace;
+	font-size: 14px;
+	opacity: 0.6;
+	transition: opacity 0.3s;
+}
+
+.footer-contact a:hover {
+	opacity: 1;
+}
+
+.footer-info p {
+	font-size: 11px;
+	letter-spacing: 2px;
+	color: rgba(255,255,255,0.3);
+	margin-bottom: 8px;
+}
+
+.footer-org a {
+	text-decoration: underline;
+}
+
+/* ========================================
+   Utility
+   ======================================== */
+@media (max-width: 768px) {
+	.section-number {
+		right: 20px;
+		top: 20px;
+	}
+}

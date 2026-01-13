@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>需求矩陣與決策分析 | ASTRONAUTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.7);
+            --text-muted: rgba(255,255,255,0.4);
+            --border: rgba(255,255,255,0.1);
+            --bg-card: rgba(255,255,255,0.03);
+            --bg-header: rgba(255,255,255,0.05);
+            --critical: #8B0000;
+            --success: #2E7D32;
+            --warning: #E65100;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Space Grotesk', sans-serif;
+            background: #0a0a0a;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(180deg, #0a1a0a 0%, #0a2010 30%, #0a1a0a 70%, #0a0a0a 100%);
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 40px 60px;
+            border-bottom: 1px solid rgba(46, 125, 50, 0.3);
+        }
+
+        .hero-label {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .doc-info {
+            margin-top: 30px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: var(--bg-header);
+            padding: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-item.success h3 { color: var(--success); }
+        .stat-item.warning h3 { color: var(--warning); }
+
+        /* Sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .section-header .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .divider {
+            border-top: 1px solid var(--border);
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--bg-header);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: var(--bg-card);
+        }
+
+        .status-pass {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .status-exceed {
+            color: #4CAF50;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            color: var(--warning);
+            font-weight: 500;
+        }
+
+        .priority-must {
+            color: var(--critical);
+            font-weight: 600;
+        }
+
+        .priority-should {
+            color: var(--warning);
+            font-weight: 500;
+        }
+
+        .priority-could {
+            color: #FFC107;
+        }
+
+        /* Decision Cards */
+        .decision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .decision-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+        }
+
+        .decision-card .dm-id {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .decision-card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .decision-card .selected {
+            background: rgba(46, 125, 50, 0.1);
+            border-left: 3px solid var(--success);
+            padding: 12px 16px;
+            margin-bottom: 16px;
+        }
+
+        .decision-card .selected-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--success);
+            margin-bottom: 4px;
+        }
+
+        .decision-card .selected-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .decision-card .reason {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Calculations */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .calc-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 24px;
+        }
+
+        .calc-card h4 {
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+
+        .calc-row .label {
+            color: var(--text-muted);
+        }
+
+        .calc-row .value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+        }
+
+        .calc-result {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .calc-result .result-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .calc-result .result-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .calc-result .result-status {
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* RTM Diagram */
+        .rtm-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 20px;
+            align-items: start;
+            margin: 40px 0;
+        }
+
+        .rtm-column {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
+
+        .rtm-column h4 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .rtm-item {
+            padding: 10px 12px;
+            background: var(--bg-header);
+            margin-bottom: 8px;
+            font-size: 12px;
+            border-left: 2px solid var(--border);
+        }
+
+        .rtm-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--text-muted);
+            padding-top: 60px;
+        }
+
+        /* Sensitivity */
+        .sensitivity-table td:nth-child(5) {
+            text-align: center;
+        }
+
+        .sens-high { color: var(--critical); }
+        .sens-medium { color: var(--warning); }
+        .sens-low { color: #FFC107; }
+        .sens-vlow { color: var(--success); }
+
+        /* Summary Table */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 24px;
+        }
+
+        .summary-card h4 {
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: var(--text-muted);
+        }
+
+        .summary-card .items {
+            font-size: 13px;
+        }
+
+        .summary-card .items li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            list-style: none;
+        }
+
+        .summary-card .items li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: #050505;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .footer a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer p {
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Weight Budget */
+        .weight-bar {
+            background: var(--bg-header);
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: flex;
+        }
+
+        .weight-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: rgba(0,0,0,0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .rtm-flow {
+                grid-template-columns: 1fr;
+            }
+            .rtm-arrow {
+                transform: rotate(90deg);
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .decision-grid {
+                grid-template-columns: 1fr;
+            }
+            .section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-label">Astronauts Team · 需求文件</div>
+        <h1>REQUIREMENTS MATRIX</h1>
+        <div class="hero-subtitle">需求矩陣與決策分析</div>
+        <p class="hero-desc">
+            運用系統工程方法，建立完整需求追溯體系，以 Pugh Matrix 進行系統性決策分析
+        </p>
+        <div class="doc-info">文件編號 AST-REQ-001 · 版本 2.0 · 2025/12/27</div>
+    </section>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>45</h3>
+                <p>需求總數</p>
+            </div>
+            <div class="stat-item success">
+                <h3>93%</h3>
+                <p>規範符合率</p>
+            </div>
+            <div class="stat-item">
+                <h3>7</h3>
+                <p>關鍵決策</p>
+            </div>
+            <div class="stat-item">
+                <h3>19</h3>
+                <p>必要需求 Must Have</p>
+            </div>
+            <div class="stat-item success">
+                <h3>15%</h3>
+                <p>高度安全裕度</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Objectives -->
+    <section class="section">
+        <div class="section-header">
+            <h2>任務目標矩陣</h2>
+            <p class="subtitle">Mission Objectives & Critical Success Factors</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>目標層級</th>
+                        <th>目標描述</th>
+                        <th>量化指標</th>
+                        <th>優先級</th>
+                        <th>權重</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>L1 任務</td>
+                        <td>成功完成競賽</td>
+                        <td>安全發射與回收</td>
+                        <td class="priority-must">必要</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>L2 性能</td>
+                        <td>達成目標高度</td>
+                        <td>>= 3,000 m</td>
+                        <td class="priority-must">必要</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>L2 性能</td>
+                        <td>安全回收火箭</td>
+                        <td>終端速度 < 12 m/s</td>
+                        <td class="priority-must">必要</td>
+                        <td>25%</td>
+                    </tr>
+                    <tr>
+                        <td>L2 性能</td>
+                        <td>創新酬載展示</td>
+                        <td>數據回傳率 > 95%</td>
+                        <td class="priority-should">重要</td>
+                        <td>20%</td>
+                    </tr>
+                    <tr>
+                        <td>L3 約束</td>
+                        <td>符合總重限制</td>
+                        <td>< 28.5 kg</td>
+                        <td class="priority-must">必要</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td>L3 約束</td>
+                        <td>符合穩定性規範</td>
+                        <td>1.5 <= SM <= 6</td>
+                        <td class="priority-must">必要</td>
+                        <td>10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h4>CSF-1: 結構完整性</h4>
+                <p class="reason">承受 15G 加速度不破壞</p>
+            </div>
+            <div class="summary-card">
+                <h4>CSF-2: 回收可靠性</h4>
+                <p class="reason">雙重冗餘確保 99% 成功率</p>
+            </div>
+            <div class="summary-card">
+                <h4>CSF-3: 飛行穩定性</h4>
+                <p class="reason">全程維持正向穩定</p>
+            </div>
+            <div class="summary-card">
+                <h4>CSF-4: 酬載功能性</h4>
+                <p class="reason">數據完整記錄與回傳</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Regulations Compliance -->
+    <section class="section">
+        <div class="section-header">
+            <h2>競賽規範符合性</h2>
+            <p class="subtitle">Regulations Compliance Matrix</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>規範條號</th>
+                        <th>規範內容</th>
+                        <th>本隊設計對應</th>
+                        <th>符合狀態</th>
+                        <th>驗證方式</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2.1</td>
+                        <td>火箭全長 > 10 倍箭身直徑</td>
+                        <td>L=2,600mm, D=155mm, L/D=16.8</td>
+                        <td class="status-pass">符合</td>
+                        <td>設計圖量測</td>
+                    </tr>
+                    <tr>
+                        <td>2.2</td>
+                        <td>火箭總質量 < 28.5 kg</td>
+                        <td>設計總重 27.8 kg</td>
+                        <td class="status-pass">符合</td>
+                        <td>電子秤量測</td>
+                    </tr>
+                    <tr>
+                        <td>3.1</td>
+                        <td>使用大會指定公版發動機</td>
+                        <td>Pioneer-10K</td>
+                        <td class="status-pass">符合</td>
+                        <td>原廠證明</td>
+                    </tr>
+                    <tr>
+                        <td>3.3</td>
+                        <td>至少 2 組發動機定心環</td>
+                        <td>3 組定心環 (前/中/後)</td>
+                        <td class="status-exceed">超越</td>
+                        <td>結構圖面</td>
+                    </tr>
+                    <tr>
+                        <td>4.1</td>
+                        <td>動態穩定裕度 1.5 <= SM <= 6</td>
+                        <td>SM = 2.45 @ 離軌時</td>
+                        <td class="status-pass">符合</td>
+                        <td>OpenRocket</td>
+                    </tr>
+                    <tr>
+                        <td>4.2</td>
+                        <td>CP-CG 間距 > 2 倍箭身直徑</td>
+                        <td>間距 = 380mm = 2.45D</td>
+                        <td class="status-pass">符合</td>
+                        <td>計算驗證</td>
+                    </tr>
+                    <tr>
+                        <td>5.1</td>
+                        <td>終端降落速度 < 12 m/s</td>
+                        <td>設計值 9.0 m/s</td>
+                        <td class="status-pass">符合</td>
+                        <td>落地測試</td>
+                    </tr>
+                    <tr>
+                        <td>5.3</td>
+                        <td>須有備援回收機制</td>
+                        <td>CO2 氣瓶備援分離</td>
+                        <td class="status-pass">符合</td>
+                        <td>功能測試</td>
+                    </tr>
+                    <tr>
+                        <td>6.1</td>
+                        <td>安裝公版 GPS 追蹤器</td>
+                        <td>預留 GPS 艙位</td>
+                        <td class="status-pass">符合</td>
+                        <td>空間確認</td>
+                    </tr>
+                    <tr>
+                        <td>7.1</td>
+                        <td>3K 組須有創新酬載</td>
+                        <td>大氣感測 + 高空影像</td>
+                        <td class="status-pass">符合</td>
+                        <td>設計審查</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Decision Matrix -->
+    <section class="section">
+        <div class="section-header">
+            <h2>決策矩陣分析</h2>
+            <p class="subtitle">採用 Pugh Matrix 進行系統性決策分析</p>
+        </div>
+
+        <div class="decision-grid">
+            <div class="decision-card">
+                <div class="dm-id">DM-001</div>
+                <h3>箭身材料選擇</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">玻璃纖維 (E-glass/Epoxy)</div>
+                </div>
+                <p class="reason">
+                    電磁透波性優異確保 GPS 訊號、成本效益平衡、團隊具備製造經驗
+                </p>
+            </div>
+
+            <div class="decision-card">
+                <div class="dm-id">DM-002</div>
+                <h3>回收系統架構</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">主傘 + 備傘獨立系統</div>
+                </div>
+                <p class="reason">
+                    可靠度最高 (99.5%)、備傘由獨立電門觸發、單一故障不導致失敗
+                </p>
+            </div>
+
+            <div class="decision-card">
+                <div class="dm-id">DM-003</div>
+                <h3>酬載系統選擇</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">大氣感測 + 高空影像複合</div>
+                </div>
+                <p class="reason">
+                    數據豐富度最高、技術成熟可行、展示多元科學價值
+                </p>
+            </div>
+
+            <div class="decision-card">
+                <div class="dm-id">DM-004</div>
+                <h3>電門系統選擇</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">氣壓 + 計時器雙電門</div>
+                </div>
+                <p class="reason">
+                    主電門：氣壓高度觸發 (精確)、備電門：計時器備援 (獨立可靠)
+                </p>
+            </div>
+
+            <div class="decision-card">
+                <div class="dm-id">DM-005</div>
+                <h3>尾翼配置設計</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">4 翼 X 配置 (45度傾斜)</div>
+                </div>
+                <p class="reason">
+                    穩定性效率最佳、與發射架導軌相容、結構強度較高
+                </p>
+            </div>
+
+            <div class="decision-card">
+                <div class="dm-id">DM-006</div>
+                <h3>分離機構選擇</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">黑火藥 + CO2 複合分離</div>
+                </div>
+                <p class="reason">
+                    主分離：黑火藥 (力道充足)、備援：CO2 氣瓶 (安全可靠)、雙重冗餘
+                </p>
+            </div>
+
+            <div class="decision-card">
+                <div class="dm-id">DM-007</div>
+                <h3>通訊系統選擇</h3>
+                <div class="selected">
+                    <div class="selected-label">選定方案</div>
+                    <div class="selected-value">433MHz LoRa</div>
+                </div>
+                <p class="reason">
+                    傳輸距離較遠、穿透能力佳、功耗較低、符合 ISM 頻段法規
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Engineering Calculations -->
+    <section class="section">
+        <div class="section-header">
+            <h2>工程計算舉證</h2>
+            <p class="subtitle">Engineering Calculations & Verification</p>
+        </div>
+
+        <div class="calc-grid">
+            <div class="calc-card">
+                <h4>穩定裕度計算 Stability Margin</h4>
+                <div class="calc-row">
+                    <span class="label">箭身直徑 (D)</span>
+                    <span class="value">155 mm</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">火箭全長 (L)</span>
+                    <span class="value">2,600 mm</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">重心位置 CG (從鼻錐)</span>
+                    <span class="value">1,520 mm</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">壓力中心 CP (從鼻錐)</span>
+                    <span class="value">1,900 mm</span>
+                </div>
+                <div class="calc-result">
+                    <div class="result-label">SM = (CP - CG) / D</div>
+                    <div class="result-value">2.45 cal</div>
+                    <div class="result-status status-pass">1.5 <= 2.45 <= 6 符合</div>
+                </div>
+            </div>
+
+            <div class="calc-card">
+                <h4>主降落傘計算 Main Parachute</h4>
+                <div class="calc-row">
+                    <span class="label">回收質量</span>
+                    <span class="value">18.8 kg</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">阻力係數 Cd</span>
+                    <span class="value">1.5</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">傘直徑</span>
+                    <span class="value">1.8 m</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">傘面積</span>
+                    <span class="value">2.54 m2</span>
+                </div>
+                <div class="calc-result">
+                    <div class="result-label">終端速度</div>
+                    <div class="result-value">9.0 m/s</div>
+                    <div class="result-status status-pass">9.0 < 12 m/s 符合</div>
+                </div>
+            </div>
+
+            <div class="calc-card">
+                <h4>備用降落傘計算 Backup Parachute</h4>
+                <div class="calc-row">
+                    <span class="label">回收質量</span>
+                    <span class="value">18.8 kg</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">阻力係數 Cd</span>
+                    <span class="value">1.5</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">傘直徑</span>
+                    <span class="value">1.2 m</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">傘面積</span>
+                    <span class="value">1.13 m2</span>
+                </div>
+                <div class="calc-result">
+                    <div class="result-label">終端速度</div>
+                    <div class="result-value">13.3 m/s</div>
+                    <div class="result-status status-pending">備援：可接受</div>
+                </div>
+            </div>
+
+            <div class="calc-card">
+                <h4>結構載荷計算 Structural Loads</h4>
+                <div class="calc-row">
+                    <span class="label">峰值推力</span>
+                    <span class="value">2,139 N</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">總質量</span>
+                    <span class="value">27.8 kg</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">發射加速度</span>
+                    <span class="value">7.9 G</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">安全係數</span>
+                    <span class="value">2.0x</span>
+                </div>
+                <div class="calc-result">
+                    <div class="result-label">設計載荷</div>
+                    <div class="result-value">20 G</div>
+                    <div class="result-status">包絡：發射 + 回收</div>
+                </div>
+            </div>
+
+            <div class="calc-card">
+                <h4>飛行模擬 Flight Simulation</h4>
+                <div class="calc-row">
+                    <span class="label">模擬軟體</span>
+                    <span class="value">OpenRocket 23.09</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">發動機</span>
+                    <span class="value">Pioneer-10K</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">風速條件</span>
+                    <span class="value">5 m/s</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">最大速度</span>
+                    <span class="value">280 m/s (M0.82)</span>
+                </div>
+                <div class="calc-result">
+                    <div class="result-label">遠地點高度 Apogee</div>
+                    <div class="result-value">3,450 m</div>
+                    <div class="result-status status-pass">+15% 裕度 符合</div>
+                </div>
+            </div>
+
+            <div class="calc-card">
+                <h4>重量預算 Weight Budget</h4>
+                <div class="calc-row">
+                    <span class="label">推進系統</span>
+                    <span class="value">15,690 g (56.4%)</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">結構系統</span>
+                    <span class="value">5,370 g (19.3%)</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">回收系統</span>
+                    <span class="value">2,010 g (7.2%)</span>
+                </div>
+                <div class="calc-row">
+                    <span class="label">酬載 + 航電</span>
+                    <span class="value">2,190 g (7.9%)</span>
+                </div>
+                <div class="calc-result">
+                    <div class="result-label">總重 / 限制</div>
+                    <div class="result-value">26.1 / 28.5 kg</div>
+                    <div class="result-status status-pass">6.1% 裕度 符合</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Sensitivity Analysis -->
+    <section class="section">
+        <div class="section-header">
+            <h2>敏感度分析</h2>
+            <p class="subtitle">Sensitivity Analysis - 評估各參數變化對飛行高度的影響</p>
+        </div>
+
+        <div class="table-container">
+            <table class="sensitivity-table">
+                <thead>
+                    <tr>
+                        <th>參數</th>
+                        <th>基準值</th>
+                        <th>變化範圍</th>
+                        <th>高度影響</th>
+                        <th>敏感度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>發動機總衝量 Total Impulse</td>
+                        <td>9,312 Ns</td>
+                        <td>+/- 5%</td>
+                        <td>+/- 250 m</td>
+                        <td class="sens-high">高</td>
+                    </tr>
+                    <tr>
+                        <td>阻力係數 Cd</td>
+                        <td>0.45</td>
+                        <td>+/- 0.05</td>
+                        <td>+/- 180 m</td>
+                        <td class="sens-high">高</td>
+                    </tr>
+                    <tr>
+                        <td>風速</td>
+                        <td>5 m/s</td>
+                        <td>+/- 5 m/s</td>
+                        <td>+/- 150 m</td>
+                        <td class="sens-medium">中</td>
+                    </tr>
+                    <tr>
+                        <td>起飛質量</td>
+                        <td>27.8 kg</td>
+                        <td>+/- 1 kg</td>
+                        <td>+/- 120 m</td>
+                        <td class="sens-medium">中</td>
+                    </tr>
+                    <tr>
+                        <td>發射仰角</td>
+                        <td>85 deg</td>
+                        <td>+/- 3 deg</td>
+                        <td>+/- 80 m</td>
+                        <td class="sens-low">低</td>
+                    </tr>
+                    <tr>
+                        <td>環境溫度</td>
+                        <td>25 C</td>
+                        <td>+/- 15 C</td>
+                        <td>+/- 50 m</td>
+                        <td class="sens-low">低</td>
+                    </tr>
+                    <tr>
+                        <td>發射架高度</td>
+                        <td>5 m</td>
+                        <td>+/- 2 m</td>
+                        <td>+/- 10 m</td>
+                        <td class="sens-vlow">極低</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Alternative Plans -->
+    <section class="section">
+        <div class="section-header">
+            <h2>備選方案</h2>
+            <p class="subtitle">Contingency Plans - 應變計畫總覽</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>決策項目</th>
+                        <th>Plan A (首選)</th>
+                        <th>Plan B (備選)</th>
+                        <th>切換條件</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>箭身材料</td>
+                        <td>玻璃纖維</td>
+                        <td>鋁合金 6061</td>
+                        <td>玻纖供貨延遲</td>
+                    </tr>
+                    <tr>
+                        <td>回收系統</td>
+                        <td>主傘 + 備傘</td>
+                        <td>引導傘 + 主傘</td>
+                        <td>重量超限</td>
+                    </tr>
+                    <tr>
+                        <td>酬載系統</td>
+                        <td>大氣 + 影像</td>
+                        <td>純大氣感測</td>
+                        <td>成本超支</td>
+                    </tr>
+                    <tr>
+                        <td>電門系統</td>
+                        <td>氣壓 + 計時</td>
+                        <td>純氣壓電門</td>
+                        <td>重量超限</td>
+                    </tr>
+                    <tr>
+                        <td>通訊系統</td>
+                        <td>433MHz LoRa</td>
+                        <td>915MHz LoRa</td>
+                        <td>433MHz 干擾</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>
+            <a href="index.html">首頁</a>
+            <a href="wind-tunnel.html">風洞測試</a>
+            <a href="materials.html">材料零件</a>
+            <a href="risk.html">風險管理</a>
+        </div>
+        <p>ASTRONAUTS TEAM · 太空人隊 · 2026 台灣盃火箭競賽</p>
+    </footer>
+
+</body>
+</html>
