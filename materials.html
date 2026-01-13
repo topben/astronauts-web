@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>材料與零件 | ASTRONAUTS</title>
+    <meta name="description" content="太空人隊火箭材料與零件介紹">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #4A90E2; --accent-orange: #F5A623; }
+        body { font-family: 'Open Sans', 'Noto Sans TC', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; margin: 0; }
+        .hero { min-height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(180deg, #0a0a1a 0%, #0f1629 100%); }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 56px; margin: 20px 0; }
+        .section { padding: 80px 40px; }
+        .section-dark { background: #0f1629; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .number { font-family: 'Orbitron', sans-serif; color: var(--accent); letter-spacing: 4px; }
+        .product-grid { display: flex; flex-direction: column; gap: 40px; max-width: 900px; margin: 0 auto; }
+        .product-image img { max-width: 100%; border-radius: 8px; }
+        .specs-table { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; margin-top: 20px; }
+        .specs-row { display: flex; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .specs-row .value { font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+        .back-link { position: fixed; top: 30px; left: 30px; color: rgba(255,255,255,0.6); text-decoration: none; }
+        .footer { background: #050508; padding: 40px; text-align: center; color: #888; }
+        .footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; BACK TO MAIN</a>
+
+    <header class="hero">
+        <div style="font-family: 'Space Grotesk'; letter-spacing: 4px; color: #888;">Astronauts Team · Materials</div>
+        <h1>HARDWARE</h1>
+        <p style="color: #aaa;">航太級材料與動力系統展示</p>
+    </header>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <div class="number">001</div>
+                <h2 style="font-family: 'Space Grotesk'; font-size: 42px;">推進系統</h2>
+                <p>競賽指定公版發動機，提供穩定推力輸出</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-image" style="background: #1a1a1a; padding: 40px; text-align: center;">
+                    <div style="font-size: 80px;">🚀</div>
+                </div>
+                <div class="product-info">
+                    <h3 style="font-size: 28px;">Pioneer-10K Rocket Motor</h3>
+                    <div style="color: var(--accent); margin-bottom: 20px;">OFFICIAL COMPETITION MOTOR</div>
+                    <p style="color: #ccc;">
+                        Pioneer-10K 是一款高性能複合燃料火箭發動機，專為 3K 級距競賽設計。
+                        其高比衝與穩定的燃燒特性，能將 28kg 重的火箭推升至 3,000 公尺以上高空。
+                    </p>
+                    <div class="specs-table">
+                        <div class="specs-row"><span class="label">總衝量 (Total Impulse)</span><span class="value" style="color: var(--accent-orange);">9,312 Ns</span></div>
+                        <div class="specs-row"><span class="label">峰值推力 (Peak Thrust)</span><span class="value">2,139 N</span></div>
+                        <div class="specs-row"><span class="label">平均推力 (Avg Thrust)</span><span class="value">1,850 N</span></div>
+                        <div class="specs-row"><span class="label">燃燒時間 (Burn Time)</span><span class="value">5.2 sec</span></div>
+                        <div class="specs-row"><span class="label">發動機等級</span><span class="value">M-Class</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="number">002</div>
+                <h2 style="font-family: 'Space Grotesk'; font-size: 42px;">回收系統</h2>
+                <p>Fruity Chutes 航太級降落傘</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-info">
+                    <h3 style="font-size: 28px;">Iris Ultra 120" Compact</h3>
+                    <div style="color: var(--accent); margin-bottom: 20px;">FRUITY CHUTES</div>
+                    <p style="color: #ccc;">
+                        採用環形傘面 (Toroidal) 結構，Cd 2.2 高阻力係數，專為有限空間設計。
+                    </p>
+                    <div class="specs-table">
+                        <div class="specs-row"><span class="label">傘面直徑</span><span class="value">120" (3.05m)</span></div>
+                        <div class="specs-row"><span class="label">阻力係數 Cd</span><span class="value">2.2</span></div>
+                        <div class="specs-row"><span class="label">收納體積</span><span class="value">128.2 cu in</span></div>
+                        <div class="specs-row"><span class="label">下降速度</span><span class="value">6.1 m/s @ 35kg</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <div class="number">003</div>
+                <h2 style="font-family: 'Space Grotesk'; font-size: 42px;">結構材料</h2>
+            </div>
+            <div class="product-grid">
+                <div class="product-info">
+                    <h3 style="font-size: 28px;">6" Carbon Fiber Airframe</h3>
+                    <div style="color: var(--accent); margin-bottom: 20px;">MADCOW ROCKETRY</div>
+                    <p style="color: #ccc;">
+                        高強度碳纖維纏繞管材，提供卓越的強度重量比，耐受 0.9 Mach 氣動加熱。
+                    </p>
+                    <div class="specs-table">
+                        <div class="specs-row"><span class="label">直徑</span><span class="value">152.4 mm</span></div>
+                        <div class="specs-row"><span class="label">長度</span><span class="value">1.52 m</span></div>
+                        <div class="specs-row"><span class="label">重量</span><span class="value">3.6 kg</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>ASTRONAUTS TEAM · 2026</p>
+        <p><a href="index.html">← 返回主頁</a></p>
+    </footer>
+</body>
+</html>

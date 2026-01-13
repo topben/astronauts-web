@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>風險管理 FMEA | ASTRONAUTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background: #0a0a0a; color: #fff; margin: 0; }
+        .hero { background: linear-gradient(180deg, #1a0a0a 0%, #2d0a0a 100%); padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Space Grotesk'; font-size: 48px; letter-spacing: 4px; margin-bottom: 10px; }
+        .section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid #222; }
+        .critical-text { color: #8B0000; font-weight: bold; }
+        .high-risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px; }
+        .high-risk-card { background: #111; border: 1px solid #333; padding: 28px; }
+        .system-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
+        .system-table th, .system-table td { padding: 12px; border-bottom: 1px solid #222; text-align: left; }
+        .rpn-value { font-weight: bold; text-align: center; }
+        .back-link { position: fixed; top: 20px; left: 20px; color: #888; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← BACK</a>
+    <header class="hero">
+        <div style="color: #666; letter-spacing: 3px;">RISK MANAGEMENT</div>
+        <h1>FMEA ANALYSIS</h1>
+        <p>失效模式與效應分析 (Failure Mode and Effects Analysis)</p>
+    </header>
+
+    <section class="section">
+        <h2>Critical Risk Items (RPN ≥ 180)</h2>
+        <div class="high-risk-grid">
+            <div class="high-risk-card">
+                <div style="color: #666; font-size: 12px;">RANK #1</div>
+                <h3>電力系統：電池耗盡</h3>
+                <div class="critical-text" style="font-size: 24px; margin: 10px 0;">RPN 240</div>
+                <p><strong>緩解措施：</strong>雙電池冗餘設計 + 150% 容量餘量</p>
+            </div>
+            <div class="high-risk-card">
+                <div style="color: #666; font-size: 12px;">RANK #2</div>
+                <h3>主控單元：MCU 當機</h3>
+                <div class="critical-text" style="font-size: 24px; margin: 10px 0;">RPN 192</div>
+                <p><strong>緩解措施：</strong>雙 MCU 熱備援架構 + 硬體看門狗</p>
+            </div>
+            <div class="high-risk-card">
+                <div style="color: #666; font-size: 12px;">RANK #3</div>
+                <h3>結構介面：酬載鬆動</h3>
+                <div class="critical-text" style="font-size: 24px; margin: 10px 0;">RPN 192</div>
+                <p><strong>緩解措施：</strong>防呆卡榫 + Loctite 固定 + 扭力規範</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>System FMEA Detail</h2>
+        <table class="system-table">
+            <thead>
+                <tr>
+                    <th>次系統</th>
+                    <th>失效模式</th>
+                    <th>影響</th>
+                    <th style="text-align:center;">RPN</th>
+                    <th>建議措施</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>分離系統</td>
+                    <td>無法接收分離指令</td>
+                    <td>降落傘無法展開</td>
+                    <td class="rpn-value">108</td>
+                    <td>雙路冗餘通訊線</td>
+                </tr>
+                <tr>
+                    <td>分離系統</td>
+                    <td>電壓不足點火失敗</td>
+                    <td>無法分離</td>
+                    <td class="rpn-value">160</td>
+                    <td>獨立分離電池 + 電壓監控</td>
+                </tr>
+                <tr>
+                    <td>感測器</td>
+                    <td>氣壓計動壓干擾</td>
+                    <td>開傘高度錯誤</td>
+                    <td class="rpn-value">175</td>
+                    <td>靜壓孔設計優化</td>
+                </tr>
+                <tr>
+                    <td>箭身結構</td>
+                    <td>超音速顫振破裂</td>
+                    <td>火箭解體</td>
+                    <td class="rpn-value">80</td>
+                    <td>安全係數 2x 設計</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: #666; font-size: 12px;">
+        ASTRONAUTS TEAM · Risk Management
+    </footer>
+</body>
+</html>
