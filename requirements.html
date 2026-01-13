@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>需求矩陣 | ASTRONAUTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; margin: 0; }
+        .hero { background: linear-gradient(180deg, #0a1a0a 0%, #0a2010 100%); padding: 80px 40px; text-align: center; }
+        .hero h1 { font-family: 'Space Grotesk'; font-size: 42px; letter-spacing: 4px; }
+        .section { max-width: 1000px; margin: 0 auto; padding: 60px 20px; border-bottom: 1px solid #222; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 40px; font-size: 14px; }
+        th { background: #1a1a1a; padding: 12px; text-align: left; color: #888; }
+        td { padding: 12px; border-bottom: 1px solid #222; }
+        .status-pass { color: #2E7D32; font-weight: bold; }
+        .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .calc-card { background: #111; padding: 20px; border: 1px solid #333; }
+        .calc-value { font-family: 'Space Grotesk'; font-size: 24px; font-weight: bold; margin-top: 10px; }
+        .back-link { position: fixed; top: 20px; left: 20px; color: #888; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← BACK</a>
+    <header class="hero">
+        <div style="color: #4CAF50; letter-spacing: 2px;">AST-REQ-001</div>
+        <h1>REQUIREMENTS</h1>
+        <p>需求矩陣與工程驗證</p>
+    </header>
+
+    <section class="section">
+        <h2>任務目標 (Mission Objectives)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>目標</th>
+                    <th>指標</th>
+                    <th>優先級</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>成功完成競賽</td><td>安全發射與回收</td><td style="color: #d32f2f;">必要</td></tr>
+                <tr><td>達成目標高度</td><td>>= 3,000 m</td><td style="color: #d32f2f;">必要</td></tr>
+                <tr><td>安全回收火箭</td><td>終端速度 < 12 m/s</td><td style="color: #d32f2f;">必要</td></tr>
+                <tr><td>符合總重限制</td><td>< 28.5 kg</td><td style="color: #d32f2f;">必要</td></tr>
+                <tr><td>穩定性規範</td><td>1.5 <= SM <= 6</td><td style="color: #d32f2f;">必要</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section">
+        <h2>工程計算驗證 (Verification)</h2>
+        <div class="calc-grid">
+            <div class="calc-card">
+                <h4>穩定裕度 (SM)</h4>
+                <div class="calc-value">2.45 cal</div>
+                <div style="color: #666; font-size: 12px;">符合 1.5 - 6.0 規範</div>
+            </div>
+            <div class="calc-card">
+                <h4>遠地點高度 (Apogee)</h4>
+                <div class="calc-value">3,450 m</div>
+                <div style="color: #666; font-size: 12px;">模擬軟體：OpenRocket</div>
+            </div>
+            <div class="calc-card">
+                <h4>降落傘終端速度</h4>
+                <div class="calc-value">9.0 m/s</div>
+                <div style="color: #666; font-size: 12px;">主傘直徑 1.8m</div>
+            </div>
+            <div class="calc-card">
+                <h4>最大飛行速度</h4>
+                <div class="calc-value">280 m/s</div>
+                <div style="color: #666; font-size: 12px;">Mach 0.82</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>決策矩陣 (Key Decisions)</h2>
+        <table>
+            <tr><td><strong>箭身材料</strong></td><td>玻璃纖維 (E-glass)</td><td>透波性佳 (GPS訊號)、成本低</td></tr>
+            <tr><td><strong>回收系統</strong></td><td>主傘 + 獨立備傘</td><td>可靠度 99.5%</td></tr>
+            <tr><td><strong>分離機構</strong></td><td>黑火藥 + CO2</td><td>雙重冗餘</td></tr>
+            <tr><td><strong>通訊系統</strong></td><td>433MHz LoRa</td><td>長距離傳輸優勢</td></tr>
+        </table>
+    </section>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Tesla 移動風洞測試 | ASTRONAUTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background: #0a0a0a; color: #fff; margin: 0; }
+        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(180deg, #0a0a1a 0%, #0f1629 100%); text-align: center; }
+        .hero h1 { font-family: 'Orbitron'; font-size: 56px; margin: 20px 0; }
+        .stats-banner { background: #357ABD; padding: 40px; display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; gap: 20px; }
+        .stat-item h3 { font-size: 40px; margin: 0; }
+        .section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+        .test-card { background: #111; padding: 24px; border: 1px solid #333; margin-bottom: 20px; }
+        .test-metric { display: inline-block; margin-right: 30px; }
+        .test-metric .value { font-family: 'Space Grotesk'; font-size: 20px; color: #4A90E2; font-weight: bold; }
+        .chart-container { background: #111; padding: 40px; border-radius: 8px; margin-top: 40px; text-align: center; }
+        .bar { display: inline-block; width: 60px; background: #357ABD; margin: 0 20px; vertical-align: bottom; }
+        .back-link { position: fixed; top: 20px; left: 20px; color: #fff; text-decoration: none; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← BACK</a>
+    <header class="hero">
+        <div style="letter-spacing: 4px; color: #888;">INNOVATION TEST PLAN</div>
+        <h1>TESLA WIND TUNNEL</h1>
+        <p style="font-size: 20px; color: #ccc;">利用 Tesla Model S Plaid 進行全尺寸火箭氣動力測試</p>
+    </header>
+
+    <div class="stats-banner">
+        <div class="stat-item">
+            <h3>260<small style="font-size:16px">km/h</small></h3>
+            <p>測試極速</p>
+        </div>
+        <div class="stat-item">
+            <h3>2.7<small style="font-size:16px">m</small></h3>
+            <p>全尺寸測試</p>
+        </div>
+        <div class="stat-item">
+            <h3>NT$5k</h3>
+            <p>低成本方案</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2 style="font-family: 'Space Grotesk';">Core Test Items</h2>
+
+        <div class="test-card">
+            <h3>1. 結構震動耐久測試</h3>
+            <p style="color: #aaa;">驗證箭體在高速氣流與 8.4G 震動環境下的結構完整性。</p>
+            <div style="margin-top: 15px;">
+                <div class="test-metric"><div class="value">260 km/h</div><div class="label">極限速度</div></div>
+                <div class="test-metric"><div class="value">30 min</div><div class="label">持續時間</div></div>
+                <div class="test-metric"><div class="value">0 裂縫</div><div class="label">通過標準</div></div>
+            </div>
+        </div>
+
+        <div class="test-card">
+            <h3>2. 鴨翼滾轉控制 (Active Roll Control)</h3>
+            <p style="color: #aaa;">測試主動控制翼面在真實氣流下的響應速度與控制力矩。</p>
+            <div style="margin-top: 15px;">
+                <div class="test-metric"><div class="value">&lt; 50ms</div><div class="label">舵機響應</div></div>
+                <div class="test-metric"><div class="value">±3°/s</div><div class="label">滾轉控制</div></div>
+            </div>
+        </div>
+
+        <div class="test-card">
+            <h3>3. 遠距通訊與 GPS 測試</h3>
+            <p style="color: #aaa;">驗證 LoRa 433MHz 與 GPS 在高速移動下的丟包率與定位延遲。</p>
+            <div style="margin-top: 15px;">
+                <div class="test-metric"><div class="value">10 Hz</div><div class="label">更新頻率</div></div>
+                <div class="test-metric"><div class="value">&lt; 1%</div><div class="label">丟包率</div></div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 style="margin-bottom: 30px;">速度覆蓋率分析</h3>
+            <div style="height: 300px; display: flex; justify-content: center; align-items: flex-end;">
+                <div class="bar" style="height: 100%; background: #f97316;">
+                    <span style="display:block; margin-top:-25px; font-weight:bold;">310</span>
+                </div>
+                <div class="bar" style="height: 23%; background: #4A90E2;">
+                    <span style="display:block; margin-top:-25px; font-weight:bold;">72</span>
+                </div>
+                <div class="bar" style="height: 10%; background: #22c55e;">
+                    <span style="display:block; margin-top:-25px; font-weight:bold;">30</span>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px; font-size: 14px; color: #aaa;">
+                <span style="color: #f97316;">● 火箭極速 (m/s)</span>
+                <span style="color: #4A90E2;">● Tesla 測試 (m/s)</span>
+                <span style="color: #22c55e;">● 離軌速度 (m/s)</span>
+            </div>
+            <p style="margin-top: 20px; color: #888;">Tesla 測試可完全覆蓋火箭發射離軌階段 (最危險區間) 的氣動環境。</p>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: #666;">
+        ASTRONAUTS TEAM · Tesla Wind Tunnel Plan
+    </footer>
+</body>
+</html>
