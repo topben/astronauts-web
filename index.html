@@ -14,14 +14,19 @@
   <div class="page-glow" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
-      <div class="logo">ASTRONAUTS</div>
-      <nav class="nav">
+      <a href="#" class="logo">ASTRONAUTS</a>
+      <nav class="nav" id="nav">
         <a href="#mission">任務</a>
         <a href="#benefits">贊助回饋</a>
         <a href="#tiers">方案級距</a>
         <a href="#contact">聯絡</a>
       </nav>
       <a class="cta" href="#contact">成為贊助夥伴</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -135,7 +140,7 @@
         <h2>贊助方案級距</h2>
         <p class="section-lead">可依需求客製合作內容，以下為參考級距。</p>
         <div class="tiers-grid">
-          <article class="tier">
+          <article class="tier featured">
             <h3>白金合作夥伴</h3>
             <p class="tier-amount">NT$ 200,000 以上</p>
             <ul>
@@ -212,6 +217,41 @@
     </div>
   </footer>
   <script>
+    // Mobile menu toggle
+    (function() {
+      const menuToggle = document.getElementById('menuToggle');
+      const nav = document.getElementById('nav');
+      const header = document.querySelector('.site-header');
+      const navLinks = nav.querySelectorAll('a');
+
+      menuToggle.addEventListener('click', function() {
+        menuToggle.classList.toggle('active');
+        nav.classList.toggle('active');
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          menuToggle.classList.remove('active');
+          nav.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // Header scroll effect
+      let lastScroll = 0;
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        lastScroll = currentScroll;
+      });
+    })();
+
+    // Starfield animation
     (function() {
       const canvas = document.getElementById("space-canvas");
       if (!canvas) {
